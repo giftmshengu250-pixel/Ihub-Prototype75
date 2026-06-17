@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iHub Africa Prototype</title>
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <img src="https://i0.wp.com/ihub.africa/wp-content/uploads/2024/06/cropped-ihub-Logo-21.png?fit=512%2C512&ssl=1" alt="iHub" width="35" height="35" class="logo-img">
+        iHub<span class="logo-accent">.africa</span>
+      </a>
+      <div class="nav-actions">
+        <div class="nav-links">
+          <a href="#hero" class="nav-link">Home</a>
+          <a href="#programs-timeline" class="nav-link">Programs & Impact</a>
+          <a href="#ecosystem" class="nav-link">Ecosystem</a>
+          <a href="#apply-wizard" class="nav-link">Join Us</a>
+        </div>
+        <div class="nav-controls">
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+            <i id="theme-toggle-dark-icon" class="fa-solid fa-moon"></i>
+            <i id="theme-toggle-light-icon" class="fa-solid fa-sun hidden"></i>
+          </button>
+          <a href="#apply-wizard" class="btn btn-solid btn-nav-cta">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero-section">
+    <div class="hero-bg-text-wrapper">
+      <h1 class="hero-bg-text">
+        We Train <br>
+        <span id="typing-hero-text" class="hero-bg-accent-text"></span>
+        <span class="typing-cursor">|</span>
+      </h1>
+    </div>
+    <div class="hero-container container">
+      <div class="hero-grid">
+        <div class="hero-left-col">
+          <h2 class="hero-badge">World-Class Tech & Digital Skills</h2>
+          <p class="hero-title">Work Ready. <span class="block-md">World Ready.</span></p>
+          <p class="hero-desc">iHub Africa provides a completely free, 6-month immersive digital skills training program for underserved youth. Launch your tech career and join the next generation of African digital leaders.</p>
+          <div class="hero-cta-group">
+            <a href="#programs-timeline" class="btn btn-solid btn-primary">Explore Our Tracks</a>
+            <a href="#ecosystem" class="btn btn-outline btn-secondary">Our Ecosystem Partners</a>
+          </div>
+        </div>
+        <div class="hero-right-col group">
+          <div class="hero-card-glow"></div>
+          <div class="hero-image-card">
+            <i class="fa-solid fa-image card-icon"></i>
+            <p class="hero-image-placeholder">[ Placeholder Image: Students or Mentor ]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE & IMPACT SECTION -->
+  <section id="programs-timeline" class="timeline-section">
+    <div class="timeline-container container">
+      <div class="timeline-header">
+        <h2 class="section-badge">Our Framework</h2>
+        <p class="section-title">The iHub Journey & Impact</p>
+        <p class="section-desc">Scroll down to see our track records and the immersive specialized streams we run over our intensive 6-month cycles.</p>
+      </div>
+      <div id="timeline-track-section" class="timeline-relative-wrapper">
+        <div class="timeline-center-line">
+          <div id="timeline-glow-line" class="timeline-glow-fill"></div>
+        </div>
+        
+        <!-- Node 1 -->
+        <div class="timeline-row">
+          <div class="timeline-col-media">
+            <div class="timeline-media-card card">
+              <i class="fa-solid fa-chart-simple card-icon"></i>
+              <p class="timeline-media-placeholder">[ Image: Graduation / Success Stats ]</p>
+            </div>
+          </div>
+          <div class="timeline-col-dot"><div class="timeline-dot"></div></div>
+          <div class="timeline-col-text">
+            <span class="badge-accent">Phase 01 // Track Record</span>
+            <h3 class="track-title">Our Proven Impact</h3>
+            <p class="track-desc">We don’t just train; we launch livelihoods. Our immersive environment directly models modern tech companies to achieve industry alignment.</p>
+            <div class="metrics-grid">
+              <div class="metric-card card">
+                <p class="metric-number-orange">80%</p>
+                <p class="metric-label">Employment Rate</p>
+              </div>
+              <div class="metric-card card">
+                <p class="metric-number-normal">100%</p>
+                <p class="metric-label">Tuition Free</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node 2 -->
+        <div class="timeline-row">
+          <div class="timeline-col-media">
+            <div class="timeline-media-card card">
+              <i class="fa-solid fa-code card-icon"></i>
+              <p class="timeline-media-placeholder">[ Image: Full Stack Development Environment ]</p>
+            </div>
+          </div>
+          <div class="timeline-col-dot"><div class="timeline-dot"></div></div>
+          <div class="timeline-col-text">
+            <span class="badge-neutral">Stream A // Tech Mastery</span>
+            <h3 class="track-title">Full-Stack Web Development</h3>
+            <p class="track-desc">Engineered for logic and problem-solving. Over 6 months, students progress from fundamental programming blocks into architecture design, data pipelines, and responsive engineering layouts.</p>
+            <div class="tech-badge-group">
+              <span class="tech-badge">HTML5/CSS3</span>
+              <span class="tech-badge">JavaScript (ES6+)</span>
+              <span class="tech-badge">React Framework</span>
+              <span class="tech-badge">Node.js & APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Node 3 -->
+        <div class="timeline-row">
+          <div class="timeline-col-media">
+            <div class="timeline-media-card card">
+              <i class="fa-solid fa-chart-pie card-icon"></i>
+              <p class="timeline-media-placeholder">[ Image: Marketing Analytics Interface ]</p>
+            </div>
+          </div>
+          <div class="timeline-col-dot"><div class="timeline-dot"></div></div>
+          <div class="timeline-col-text">
+            <span class="badge-neutral">Stream B // Brand Architecture</span>
+            <h3 class="track-title">Strategic Digital Marketing</h3>
+            <p class="track-desc">Engineered for data-driven creative growth. Students master audience acquisition systems, optimization frameworks, tracking installations, and asset scaling execution.</p>
+            <div class="tech-badge-group">
+              <span class="tech-badge">SEO / SEM Engines</span>
+              <span class="tech-badge">Performance Campaigning</span>
+              <span class="tech-badge">Meta & Google Analytics</span>
+              <span class="tech-badge">Copywriting Conversion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUAL MOTION MARQUEES -->
+  <section id="ecosystem" class="ecosystem-section">
+    <div class="ecosystem-header">
+      <h2 class="section-badge">Our Network & Insights</h2>
+      <p class="section-title">Ecosystem Partners & Core FAQs</p>
+    </div>
+    <div class="marquee-wrapper-right">
+      <div class="animate-marquee-right">
+        <span class="marquee-brand-text">[GOOGLE.SA]</span>
+        <span class="marquee-brand-text">[AWS_AFRICA]</span>
+        <span class="marquee-brand-text">[STANDARD_BANK]</span>
+        <span class="marquee-brand-text">[MTN_GROUP]</span>
+        <span class="marquee-brand-text">[MICROSOFT_4AFRIKA]</span>
+        <span class="marquee-brand-text">[NASPERS_LABS]</span>
+        <!-- Duplicated for seamless loop -->
+        <span class="marquee-brand-text">[GOOGLE.SA]</span>
+        <span class="marquee-brand-text">[AWS_AFRICA]</span>
+        <span class="marquee-brand-text">[STANDARD_BANK]</span>
+        <span class="marquee-brand-text">[MTN_GROUP]</span>
+        <span class="marquee-brand-text">[MICROSOFT_4AFRIKA]</span>
+        <span class="marquee-brand-text">[NASPERS_LABS]</span>
+      </div>
+    </div>
+    <div id="faq" class="marquee-wrapper-left">
+      <div class="animate-marquee-left">
+        <div class="faq-card card">
+          <p class="faq-question">Is the program really 100% free?</p>
+          <p class="faq-answer">Yes. Every single cohort is fully sponsored by our impact partners. Zero hidden tuition fees.</p>
+        </div>
+        <div class="faq-card card">
+          <p class="faq-question">What are the daily class requirements?</p>
+          <p class="faq-answer">It is completely immersive. Monday through Friday, full-day sprint schedules for 6 continuous months.</p>
+        </div>
+        <div class="faq-card card">
+          <p class="faq-question">Do I need prior coding skills?</p>
+          <p class="faq-answer">No. Our curriculum is tailored to engineer talent from the absolute ground up. We value grit over backgrounds.</p>
+        </div>
+        <div class="faq-card card">
+          <p class="faq-question">Where do graduates work?</p>
+          <p class="faq-answer">Across our localized tech networks, enterprise partners, and distributed international digital teams.</p>
+        </div>
+        <!-- Duplicated for seamless loop -->
+        <div class="faq-card card">
+          <p class="faq-question">Is the program really 100% free?</p>
+          <p class="faq-answer">Yes. Every single cohort is fully sponsored by our impact partners. Zero hidden tuition fees.</p>
+        </div>
+        <div class="faq-card card">
+          <p class="faq-question">What are the daily class requirements?</p>
+          <p class="faq-answer">It is completely immersive. Monday through Friday, full-day sprint schedules for 6 continuous months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE WIZARD APPLICATION FORM -->
+  <section id="apply-wizard" class="wizard-section">
+    <div class="wizard-container">
+      <div class="wizard-card card">
+        <div class="wizard-header">
+          <div>
+            <h3 class="wizard-heading">Cohort Intake Portal</h3>
+            <p id="wizard-step-caption" class="wizard-subheading">Step 1 of 3: Select Focus Track</p>
+          </div>
+          <div class="wizard-progress-bg">
+            <div id="wizard-progress-fill" class="wizard-progress-bar"></div>
+          </div>
+        </div>
+        <form id="ihub-onboarding-form" onsubmit="return false;">
+          
+          <!-- Step 1 -->
+          <div id="form-step-1" class="form-step">
+            <p class="wizard-instruction">Which direction aligns with your future tech aspirations?</p>
+            <div class="wizard-grid-cards">
+              <div onclick="selectTrack('webdev')" id="track-card-webdev" class="wizard-track-card active">
+                <div class="wizard-card-top">
+                  <i class="fa-solid fa-code card-icon-orange"></i>
+                  <div id="radio-dot-webdev" class="wizard-radio-dot active"></div>
+                </div>
+                <p class="wizard-track-title">Web Development</p>
+                <p class="wizard-track-desc">Logic, database engines, engineering system code architectures.</p>
+              </div>
+              <div onclick="selectTrack('marketing')" id="track-card-marketing" class="wizard-track-card">
+                <div class="wizard-card-top">
+                  <i class="fa-solid fa-chart-pie card-icon-muted"></i>
+                  <div id="radio-dot-marketing" class="wizard-radio-dot"></div>
+                </div>
+                <p class="wizard-track-title">Digital Marketing</p>
+                <p class="wizard-track-desc">Data growth patterns, optimization tracks, conversion copy frameworks.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="form-step-2" class="form-step hidden">
+            <div class="form-group-wrapper">
+              <div class="form-field">
+                <label class="form-label">Your Full Name</label>
+                <input type="text" id="app-name" placeholder="e.g. Thabo Ndlovu" class="form-input">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="app-email" placeholder="thabo@example.com" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div id="form-step-3" class="form-step hidden">
+            <p class="wizard-instruction">Rate your current personal motivation to complete a rigorous 6-month system track:</p>
+            <div class="slider-wrapper">
+              <input type="range" min="1" max="10" value="8" id="motivation-slider" class="form-slider">
+              <div class="slider-labels">
+                <span>Curious</span>
+                <span id="slider-value" class="slider-numeric-value">8/10</span>
+                <span>Obsessed & Ready</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Success Component -->
+          <div id="form-step-success" class="wizard-success-pane hidden">
+            <div class="success-icon-box"><i class="fa-solid fa-check"></i></div>
+            <h4 class="success-title">Application Transmitted!</h4>
+            <p class="success-desc">Awesome job! We've pinned your selected track choice to your bio database file. Expect automated technical diagnostic challenges in your email inbox within 48 hours.</p>
+          </div>
+
+          <!-- Footer Navigation Buttons -->
+          <div id="wizard-navigation-buttons" class="wizard-footer-buttons">
+            <button type="button" id="prev-btn" class="btn btn-wizard-back disabled">Back</button>
+            <button type="button" id="next-btn" class="btn btn-solid btn-wizard-next">Continue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="footer-container container">
+      <div class="footer-upper-tier">
+        <div class="footer-brand-side">
+          <a href="#hero" class="footer-logo">
+            <img src="https://i0.wp.com/ihub.africa/wp-content/uploads/2024/06/cropped-ihub-Logo-21.png?fit=512%2C512&ssl=1" alt="iHub" width="35" height="35" class="logo-img">
+            iHub<span class="logo-accent">.africa</span>
+          </a>
+          <p class="footer-brand-desc">Accelerating digital equity across Africa through zero-fee, hyper-immersive technological skill development pipelines.</p>
+          <div class="footer-status-badge">
+            <span class="status-dot"></span>
+            <span>2026 Cohort: Admissions Open</span>
+          </div>
+        </div>
+        <div class="footer-partner-card card">
+          <div class="partner-text-wrapper">
+            <p class="partner-card-title">Become an Ecosystem Partner</p>
+            <p class="partner-card-desc">Is your enterprise organization looking to source vetted, entry-level engineering or product marketing professionals? Let's connect.</p>
+          </div>
+          <a href="mailto:partnerships@ihub.africa" class="btn btn-accent btn-partner-cta">Recruit Talent</a>
+        </div>
+      </div>
+      <div class="footer-sitemap-grid">
+        <div class="sitemap-column">
+          <p class="sitemap-heading">Platform</p>
+          <ul class="sitemap-list">
+            <li><a href="#hero" class="sitemap-link">Home Portal</a></li>
+            <li><a href="#programs-timeline" class="sitemap-link">Impact History</a></li>
+            <li><a href="#ecosystem" class="sitemap-link">Partner Directory</a></li>
+            <li><a href="#faq" class="sitemap-link">Knowledge Base FAQs</a></li>
+          </ul>
+        </div>
+        <div class="sitemap-column">
+          <p class="sitemap-heading">Syllabus Frameworks</p>
+          <ul class="sitemap-list">
+            <li><a href="#programs-timeline" class="sitemap-link">Full Stack Engineering</a></li>
+            <li><a href="#programs-timeline" class="sitemap-link">Growth Marketing Engines</a></li>
+            <li><a href="#apply-wizard" class="sitemap-link">Intake Entrance Exams</a></li>
+          </ul>
+        </div>
+        <div class="sitemap-column">
+          <p class="sitemap-heading">Governance</p>
+          <ul class="sitemap-list">
+            <li><a href="#ecosystem" class="sitemap-link">Impact Reporting</a></li>
+            <li><a href="#" class="sitemap-link">Sponsorship Models</a></li>
+            <li><a href="#" class="sitemap-link">Donor Transparency</a></li>
+          </ul>
+        </div>
+        <div class="sitemap-column">
+          <p class="sitemap-heading">Legal Documentation</p>
+          <ul class="sitemap-list">
+            <li><a href="#" class="sitemap-link">Terms of Acceptance</a></li>
+            <li><a href="#" class="sitemap-link">Student Privacy Mandates</a></li>
+            <li><a href="#" class="sitemap-link">Code of Professionalism</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-tier">
+        <p>&copy; 2026 iHub Africa Frameworks. Documented entirely tuition-free.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link">[LINKEDIN]</a>
+          <a href="#" class="social-link">[GITHUB_ORG]</a>
+          <a href="#" class="social-link">[TWITTER_X]</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Declarations -->
+  <script src="main.js"></script>
+  <script src="additional.js"></script>
+</body>
+</html>
