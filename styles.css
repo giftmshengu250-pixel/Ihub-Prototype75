@@ -243,6 +243,135 @@ html.dark .hero-bg-text { opacity: 0.08; }
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
+/*hamburger menu*/
+/* ============================================================
+ * iHub Africa — Navbar CSS
+ * Covers:
+ *  1. Hamburger button
+ *  2. Mobile dropdown menu
+ *  3. Sticky shadow on scroll
+ *  4. Active link highlight
+ *  5. Responsive breakpoint (768px)
+ * ============================================================ */
+
+
+/* ── 1. HAMBURGER BUTTON ────────────────────────────────────── */
+
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 9px;
+  transition: background 0.15s ease;
+  order: 2;
+}
+
+.hamburger-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* The three bars */
+.hamburger-btn .bar {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+/* Animate bars into an X when menu is open */
+.hamburger-btn.open .bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburger-btn.open .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-btn.open .bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+
+/* ── 2. STICKY SHADOW ON SCROLL ─────────────────────────────── */
+
+.navbar.scrolled {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+
+/* ── 3. ACTIVE NAV LINK ─────────────────────────────────────── */
+
+.nav-link.is-active {
+  color: var(--color-orange, #f97316) !important;
+  font-weight: 500;
+}
+
+
+/* ── 4. MOBILE STYLES (max-width: 768px) ────────────────────── */
+
+@media (max-width: 768px) {
+
+  /* Show hamburger on mobile */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Hide desktop links by default */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-navbar, #0f0f0f);
+    padding: 12px 16px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 999;
+  }
+
+  /* Show dropdown when menu is open */
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  /* Individual mobile link styling */
+  .nav-link {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: background 0.15s ease;
+  }
+
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Sticky navbar so dropdown sits flush below it */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Relative so dropdown can use position: absolute */
+  .nav-container {
+    position: relative;
+  }
+}
+
 .card-icon { font-size: 4rem; color: var(--text-faint); }
 
 .hero-image-placeholder,
