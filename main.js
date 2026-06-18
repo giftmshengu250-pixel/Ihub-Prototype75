@@ -35,6 +35,7 @@ function initDarkMode() {
 // --- TYPEWRITER ENGINE LOGIC ---
 function initTypewriter() {
   const typingSpan = document.getElementById('typing-hero-text');
+  if (!typingSpan) return;
   const phrases = ["Full-Stack Devs", "Digital Marketers", "Global Leaders"];
   let phraseIndex = 0;
   let charIndex = 0;
@@ -172,7 +173,10 @@ function initApplicationWizard() {
     });
   }
   
-  document.getElementById('prev-btn').addEventListener('click', () => moveWizard(-1));
-  document.getElementById('next-btn').addEventListener('click', () => moveWizard(1));
-}
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  if (!prevBtn || !nextBtn) return;
 
+  prevBtn.addEventListener('click', () => moveWizard(-1));
+  nextBtn.addEventListener('click', () => moveWizard(1));
+}
