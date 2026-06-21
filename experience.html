@@ -350,6 +350,128 @@
       opacity: 0.9;
     }
 
+    .submit-btn-wide:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+
+    /* Progress bar */
+    .coach-progress-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .coach-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+    .coach-progress-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: 6px 0 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Field errors */
+    .form-error {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #e0413f;
+      margin-top: 6px;
+    }
+    .form-error.hidden { display: none; }
+    .input-field-group input.input-invalid,
+    .input-field-group select.input-invalid {
+      border-color: #e0413f;
+    }
+    .input-field-group input.input-valid {
+      border-color: #2bb673;
+    }
+
+    /* Dynamic track description */
+    .track-description {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* Experience level badge */
+    .experience-level {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* Character counter */
+    .char-counter {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 6px;
+    }
+    .coach-textarea {
+      min-height: 100px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    /* Skill match score card */
+    .skill-match-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .skill-match-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+    .skill-match-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .skill-match-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .skill-match-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
     @keyframes pulseGlow {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.8; transform: scale(1.02); }
@@ -545,35 +667,66 @@
 
         <div class="coach-form-wrapper scroll-hidden">
           <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 5px;">Sign Up To Coach!</h3>
-          <p class="text-muted font-sm mb-4" style="margin-bottom: 25px;">Provide your professional vectors below to start making an impact.</p>
-          
-          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Coach Application Cache Simulated.');">
+          <p class="text-muted font-sm mb-4" style="margin-bottom: 15px;">Provide your professional details below to start making an impact.</p>
+
+          <div class="coach-progress-bg">
+            <div id="coach-progress-fill" class="coach-progress-fill"></div>
+          </div>
+          <p id="coach-progress-label" class="coach-progress-label">0% complete</p>
+
+          <form id="coach-signup-form" action="#" method="POST" onsubmit="handleCoachSubmit(event)" novalidate>
             <div class="form-row">
               <div class="input-field-group">
                 <label for="coach-firstname">First Name</label>
-                <input type="text" id="coach-firstname" required placeholder="John">
+                <input type="text" id="coach-firstname" required placeholder="e.g. John">
+                <span id="coach-firstname-error" class="form-error hidden"></span>
               </div>
               <div class="input-field-group">
                 <label for="coach-lastname">Last Name</label>
-                <input type="text" id="coach-lastname" required placeholder="Doe">
+                <input type="text" id="coach-lastname" required placeholder="e.g. Doe">
+                <span id="coach-lastname-error" class="form-error hidden"></span>
               </div>
             </div>
 
             <div class="input-field-group">
               <label for="coach-email">Professional Email Address</label>
-              <input type="email" id="coach-email" required placeholder="johndoe@enterprise.com">
+              <input type="email" id="coach-email" required placeholder="e.g. johndoe@enterprise.com">
+              <span id="coach-email-error" class="form-error hidden"></span>
             </div>
 
             <div class="input-field-group">
               <label for="coach-track">Domain Specialization Field</label>
-              <select id="coach-track">
+              <select id="coach-track" required onchange="updateTrackDescription()">
+                <option value="" disabled selected>e.g. Select your area of expertise</option>
                 <option value="dev">Full-Stack Software Engineering</option>
                 <option value="marketing">Digital Performance Marketing & Analytics</option>
                 <option value="leadership">Venture Capital Strategy & Agile Leadership</option>
               </select>
+              <p id="track-description" class="track-description hidden"></p>
             </div>
 
-            <button type="submit" class="submit-btn-wide">Submit Verification Profile</button>
+            <div class="input-field-group">
+              <label for="coach-experience">Years of Professional Experience</label>
+              <input type="number" id="coach-experience" required min="0" max="60" placeholder="e.g. 5" oninput="updateExperienceLevel()">
+              <span id="coach-experience-level" class="experience-level hidden"></span>
+              <span id="coach-experience-error" class="form-error hidden"></span>
+            </div>
+
+            <div class="input-field-group">
+              <label for="coach-motivation">Why Do You Want To Coach?</label>
+              <textarea id="coach-motivation" required maxlength="400" placeholder="e.g. I want to coach because..." class="coach-textarea" oninput="updateCoachProgress()"></textarea>
+              <span id="coach-motivation-counter" class="char-counter">0 / 400</span>
+            </div>
+
+            <div id="skill-match-card" class="skill-match-card hidden">
+              <p class="skill-match-title"><i class="fa-solid fa-bullseye"></i> iHub Skill Match Score</p>
+              <div class="skill-match-bar-bg">
+                <div id="skill-match-bar-fill" class="skill-match-bar-fill"></div>
+              </div>
+              <p id="skill-match-text" class="skill-match-text">—</p>
+            </div>
+
+            <button type="submit" id="coach-submit-btn" class="submit-btn-wide" disabled>Submit Verification Profile</button>
           </form>
         </div>
 
@@ -591,5 +744,249 @@
 
   <script src="main.js"></script>
   <script src="additional.js"></script>
+
+  <script>
+    /**
+     * Coach Sign-Up Form: real-time validation, dynamic content, progress, skill match
+     */
+    const FREE_EMAIL_DOMAINS = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com', 'aol.com', 'live.com', 'protonmail.com'];
+
+    const TRACK_DESCRIPTIONS = {
+      dev: "You'll mentor trainees through full-stack engineering fundamentals — from clean code practices to architecture decisions and real-world debugging habits.",
+      marketing: "You'll guide trainees on performance marketing, analytics tooling, and campaign strategy, helping them build a portfolio that proves results.",
+      leadership: "You'll coach trainees on strategic thinking, stakeholder communication, and the leadership habits that turn a junior hire into a future manager."
+    };
+
+    function nameIsValid(value) {
+      // Letters, spaces, hyphens, apostrophes only — no numbers or other special characters
+      return /^[A-Za-z\s'-]+$/.test(value.trim()) && value.trim().length > 0;
+    }
+
+    function setFieldState(inputId, errorId, valid, message) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      if (!input) return;
+      if (input.value.trim() === '') {
+        input.classList.remove('input-invalid', 'input-valid');
+        if (error) { error.textContent = ''; error.classList.add('hidden'); }
+        return;
+      }
+      if (valid) {
+        input.classList.remove('input-invalid');
+        input.classList.add('input-valid');
+        if (error) { error.textContent = ''; error.classList.add('hidden'); }
+      } else {
+        input.classList.add('input-invalid');
+        input.classList.remove('input-valid');
+        if (error) { error.textContent = message; error.classList.remove('hidden'); }
+      }
+    }
+
+    function validateCoachName(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const valid = nameIsValid(input.value);
+      setFieldState(inputId, errorId, valid, 'Names can only contain letters, spaces, hyphens, or apostrophes — no numbers or symbols.');
+      updateCoachProgress();
+      return valid;
+    }
+
+    function isValidEmailFormat(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateCoachEmail() {
+      const input = document.getElementById('coach-email');
+      const error = document.getElementById('coach-email-error');
+      const email = input.value.trim();
+
+      if (email === '') {
+        input.classList.remove('input-invalid', 'input-valid');
+        error.textContent = '';
+        error.classList.add('hidden');
+        updateCoachProgress();
+        return false;
+      }
+
+      if (!isValidEmailFormat(email)) {
+        input.classList.add('input-invalid');
+        input.classList.remove('input-valid');
+        error.textContent = 'Please enter a valid email address (e.g. name@company.com).';
+        error.classList.remove('hidden');
+        updateCoachProgress();
+        return false;
+      }
+
+      const domain = email.split('@')[1]?.toLowerCase();
+      if (FREE_EMAIL_DOMAINS.includes(domain)) {
+        input.classList.remove('input-invalid');
+        input.classList.add('input-valid');
+        error.textContent = 'Tip: a business or professional email helps verify your expertise faster, though this address is still accepted.';
+        error.classList.remove('hidden');
+        error.style.color = '#b8860b';
+        updateCoachProgress();
+        return true;
+      }
+
+      input.classList.remove('input-invalid');
+      input.classList.add('input-valid');
+      error.textContent = '';
+      error.classList.add('hidden');
+      error.style.color = '';
+      updateCoachProgress();
+      return true;
+    }
+
+    function updateTrackDescription() {
+      const select = document.getElementById('coach-track');
+      const desc = document.getElementById('track-description');
+      const text = TRACK_DESCRIPTIONS[select.value];
+      if (text) {
+        desc.textContent = text;
+        desc.classList.remove('hidden');
+      } else {
+        desc.classList.add('hidden');
+      }
+      updateCoachProgress();
+    }
+
+    function updateExperienceLevel() {
+      const input = document.getElementById('coach-experience');
+      const badge = document.getElementById('coach-experience-level');
+      const error = document.getElementById('coach-experience-error');
+      const years = Number(input.value);
+
+      if (input.value.trim() === '') {
+        badge.classList.add('hidden');
+        error.classList.add('hidden');
+        updateCoachProgress();
+        return;
+      }
+
+      if (isNaN(years) || years < 0) {
+        input.classList.add('input-invalid');
+        error.textContent = 'Please enter a valid number of years.';
+        error.classList.remove('hidden');
+        badge.classList.add('hidden');
+        updateCoachProgress();
+        return;
+      }
+
+      input.classList.remove('input-invalid');
+      error.classList.add('hidden');
+
+      let level;
+      if (years < 2) level = 'Emerging Professional';
+      else if (years < 5) level = 'Experienced Practitioner';
+      else if (years < 10) level = 'Senior Expert';
+      else level = 'Industry Veteran';
+
+      badge.textContent = level;
+      badge.classList.remove('hidden');
+      updateCoachProgress();
+    }
+
+    function updateCoachProgress() {
+      const fields = [
+        document.getElementById('coach-firstname'),
+        document.getElementById('coach-lastname'),
+        document.getElementById('coach-email'),
+        document.getElementById('coach-track'),
+        document.getElementById('coach-experience'),
+        document.getElementById('coach-motivation')
+      ];
+
+      const filledCount = fields.filter(f => f.value.trim() !== '').length;
+      const progress = Math.round((filledCount / fields.length) * 100);
+
+      document.getElementById('coach-progress-fill').style.width = progress + '%';
+      document.getElementById('coach-progress-label').textContent = progress + '% complete';
+
+      const motivationField = document.getElementById('coach-motivation');
+      const motivationCounter = document.getElementById('coach-motivation-counter');
+      if (motivationField && motivationCounter) {
+        motivationCounter.textContent = `${motivationField.value.length} / 400`;
+      }
+
+      const formValid = isCoachFormValid();
+      document.getElementById('coach-submit-btn').disabled = !formValid;
+
+      updateSkillMatchScore(fields, formValid);
+    }
+
+    function isCoachFormValid() {
+      const firstNameOk = nameIsValid(document.getElementById('coach-firstname').value);
+      const lastNameOk = nameIsValid(document.getElementById('coach-lastname').value);
+      const emailOk = isValidEmailFormat(document.getElementById('coach-email').value.trim());
+      const trackOk = document.getElementById('coach-track').value !== '';
+      const expVal = document.getElementById('coach-experience').value.trim();
+      const expOk = expVal !== '' && Number(expVal) >= 0;
+      const motivationOk = document.getElementById('coach-motivation').value.trim().length > 0;
+
+      return firstNameOk && lastNameOk && emailOk && trackOk && expOk && motivationOk;
+    }
+
+    /**
+     * Skill Match Score: a lightweight heuristic combining experience depth,
+     * specialization clarity, and motivation detail to estimate coach-readiness.
+     */
+    function updateSkillMatchScore(fields, formValid) {
+      const card = document.getElementById('skill-match-card');
+      const track = document.getElementById('coach-track').value;
+      const experience = Number(document.getElementById('coach-experience').value) || 0;
+      const motivation = document.getElementById('coach-motivation').value.trim();
+
+      if (!track && experience === 0 && motivation.length === 0) {
+        card.classList.add('hidden');
+        return;
+      }
+      card.classList.remove('hidden');
+
+      let score = 0;
+      // Experience contributes up to 50 points
+      score += Math.min(experience * 5, 50);
+      // Having a track selected contributes 20 points
+      if (track) score += 20;
+      // Motivation depth contributes up to 30 points
+      score += Math.min(Math.floor(motivation.length / 400 * 30), 30);
+
+      score = Math.min(Math.round(score), 100);
+
+      const bar = document.getElementById('skill-match-bar-fill');
+      const text = document.getElementById('skill-match-text');
+      bar.style.width = score + '%';
+
+      let label;
+      if (score >= 80) label = 'Excellent match — your profile strongly aligns with iHub coaching needs.';
+      else if (score >= 55) label = 'Good match — your profile fits well, a bit more detail could strengthen it.';
+      else if (score >= 30) label = 'Developing match — add more experience or motivation detail to improve your fit.';
+      else label = 'Early stage — fill in more details to see your match improve.';
+
+      text.textContent = `${score}/100 — ${label}`;
+    }
+
+    function handleCoachSubmit(e) {
+      e.preventDefault();
+      if (!isCoachFormValid()) return;
+      const firstName = document.getElementById('coach-firstname').value.trim();
+      alert(`Thanks, ${firstName}! Your coach application has been received. Our team will review your profile and follow up by email.`);
+      document.getElementById('coach-signup-form').reset();
+      document.getElementById('track-description').classList.add('hidden');
+      document.getElementById('coach-experience-level').classList.add('hidden');
+      document.getElementById('skill-match-card').classList.add('hidden');
+      updateCoachProgress();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstName = document.getElementById('coach-firstname');
+      const lastName = document.getElementById('coach-lastname');
+      const email = document.getElementById('coach-email');
+
+      if (firstName) firstName.addEventListener('input', () => validateCoachName('coach-firstname', 'coach-firstname-error'));
+      if (lastName) lastName.addEventListener('input', () => validateCoachName('coach-lastname', 'coach-lastname-error'));
+      if (email) email.addEventListener('input', validateCoachEmail);
+
+      updateCoachProgress();
+    });
+  </script>
 </body>
 </html>
