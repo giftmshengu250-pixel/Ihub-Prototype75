@@ -255,6 +255,30 @@
       box-shadow: 0 12px 24px var(--neon-glow);
     }
 
+    .kinetic-button:disabled,
+    .kinetic-button.btn-disabled-state {
+      background: #8a8a8a;
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
+      box-shadow: none;
+    }
+    .kinetic-button:disabled:hover,
+    .kinetic-button.btn-disabled-state:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .form-error {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ff5f56;
+      margin-top: -18px;
+      margin-bottom: 18px;
+    }
+    .form-error.hidden { display: none; }
+
     /* Keyframes Core Layout Engine */
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
@@ -337,7 +361,7 @@
             </div>
 
             <div class="loc-node-card">
-              <p style="color:var(--accent); font-weight:bold; font-size:0.8rem; letter-spacing:1px; margin-bottom:5px;">DIRECT TELECOMMUNICATION PINGS</p>
+              <p style="color: var(--accent); font-weight:bold; font-size:0.8rem; letter-spacing:1px; margin-bottom:5px;">DIRECT TELECOMMUNICATION PINGS</p>
               <p style="color:#fff; font-size:0.95rem; font-weight:700;">Voicemail System Link</p>
               <p style="font-size:0.85rem; mt-1">+27 (0)88 515 2527 // info@ihub.africa</p>
             </div>
@@ -347,8 +371,8 @@
         <!-- RIGHT NODE PORTAL: Morphing Glass Data Collector Form -->
         <div class="right-node-panel scroll-hidden">
           <div class="morph-glass-container">
-            <h2 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 5px;">INITIALIZE TRANSMISSION</h2>
-            <p class="text-muted font-sm" style="margin-bottom: 30px;">Choose an operational vector below to recalibrate layout vectors dynamically.</p>
+            <h2 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 5px;">SEND US A MESSAGE</h2>
+            <p class="text-muted font-sm" style="margin-bottom: 30px;">Select who you are below and the form will adjust to ask the right questions.</p>
 
             <form id="matrix-contact-engine" onsubmit="handleFormBlast(event)">
               
@@ -377,14 +401,15 @@
               <div class="neon-input-wrapper">
                 <input type="email" id="node-email" placeholder=" " required>
                 <label id="label-email" for="node-email">Digital Email Address</label>
+                <span id="node-email-error" class="form-error hidden"></span>
               </div>
 
               <div class="neon-input-wrapper">
                 <textarea id="node-message" placeholder=" " required></textarea>
-                <label id="label-message" for="node-message">Transmission Data Packet Payload...</label>
+                <label id="label-message" for="node-message">e.g. Tell us what track you're interested in and why...</label>
               </div>
 
-              <button type="submit" class="kinetic-button">Blast Signal Out</button>
+              <button type="submit" id="blast-btn" class="kinetic-button" disabled>Send Message</button>
             </form>
           </div>
         </div>
@@ -411,6 +436,9 @@
      * Crazy Interactive Form Context Custom Controller 
      * Dynamically swaps out descriptive labels to keep users highly engaged
      */
+    /**
+     * Dynamically swaps out descriptive labels based on who is contacting us
+     */
     function switchFormContext(profile) {
       const labelName = document.getElementById('label-name');
       const labelEmail = document.getElementById('label-email');
@@ -418,27 +446,67 @@
 
       if (profile === 'trainee') {
         labelName.innerText = "Your Full Name";
-        labelEmail.innerText = "Digital Email Address";
-        labelMessage.innerText = "What track are you passionate about and why do you want to join us?";
+        labelEmail.innerText = "Email Address";
+        labelMessage.innerText = "e.g. Tell us what track you're interested in and why...";
       } else if (profile === 'corporate') {
         labelName.innerText = "Enterprise Representative Name";
-        labelEmail.innerText = "Corporate Email Domain";
-        labelMessage.innerText = "Detail your alignment parameters (Hiring Talent, Corporate Social Investment, or Custom Mentorship)?";
+        labelEmail.innerText = "Corporate Email Address";
+        labelMessage.innerText = "e.g. Detail your alignment parameters (hiring talent, sponsorship, or mentorship)...";
       } else {
-        labelName.innerText = "Crypto Alias / Identity Handle";
-        labelEmail.innerText = "Communication Channel Link";
-        labelMessage.innerText = "Drop your wild ideas, unexpected venture proposals, or ecosystem questions here...";
+        labelName.innerText = "Your Name";
+        labelEmail.innerText = "Email Address";
+        labelMessage.innerText = "e.g. Drop your idea, proposal, or question here...";
       }
+      validateContactForm();
     }
 
     /**
-     * Intercept form validation and fire a sleek custom success alert
+     * Live validation: email format + required fields, greys out submit until valid
+     */
+    function isValidContactEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateContactForm() {
+      const name = document.getElementById('node-name').value.trim();
+      const email = document.getElementById('node-email').value.trim();
+      const message = document.getElementById('node-message').value.trim();
+      const emailError = document.getElementById('node-email-error');
+      const submitBtn = document.getElementById('blast-btn');
+
+      let emailOk = true;
+      if (email.length > 0 && !isValidContactEmail(email)) {
+        emailError.textContent = "Please enter a valid email address (e.g. name@example.com).";
+        emailError.classList.remove('hidden');
+        emailOk = false;
+      } else {
+        emailError.textContent = "";
+        emailError.classList.add('hidden');
+      }
+
+      const allFilled = name.length > 0 && email.length > 0 && message.length > 0;
+      const formValid = allFilled && emailOk;
+
+      submitBtn.disabled = !formValid;
+      submitBtn.classList.toggle('btn-disabled-state', !formValid);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ['node-name', 'node-email', 'node-message'].forEach(id => {
+        document.getElementById(id).addEventListener('input', validateContactForm);
+      });
+      validateContactForm();
+    });
+
+    /**
+     * Intercept form submission and show a clear success message
      */
     function handleFormBlast(e) {
       e.preventDefault();
       const userParam = document.getElementById('node-name').value;
-      alert(`⚡ TRANSMISSION SUCCESSFUL, ${userParam.toUpperCase()}!\nYour digital packet data has been uploaded to the iHub node matrix successfully.`);
+      alert(`Thanks, ${userParam}! Your message has been sent to the iHub team. We'll get back to you within 48 hours.`);
       document.getElementById('matrix-contact-engine').reset();
+      validateContactForm();
     }
   </script>
 </body>
